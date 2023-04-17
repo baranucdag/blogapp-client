@@ -1,0 +1,27 @@
+#newPostForm {
+  margin-top: 10px;
+}
+
+#bodyInput {
+  width: 100%;
+}
+
+#newPostPreview {
+  width: 100%;
+  display: block;
+  background-color: white;
+  border-radius: border-radius;
+}
+
+.form-text {
+  font-size: 0.8rem;
+}
+
+.box img {
+  width: 405px;
+  height: 245px;
+}
+
+.box1 img {
+  object-fit: cover;
+}

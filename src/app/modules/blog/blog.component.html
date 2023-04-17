@@ -1,0 +1,21 @@
+<app-navi></app-navi>
+<header
+  class="masthead"
+  id="image"
+  [ngStyle]="{ 'background-image': 'url(' + imageDirectoryPath + ')' }"
+>
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <div class="site-heading">
+          <h2>{{ blogHeader }}</h2>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- MASTHEAD DIŞINDAKİ İÇERİK -->
+<router-outlet></router-outlet>
+<div class="container"><hr /></div>
+<app-footer></app-footer>

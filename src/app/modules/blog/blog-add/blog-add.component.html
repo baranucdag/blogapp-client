@@ -1,0 +1,61 @@
+<div class="container">
+  <form [formGroup]="blogAddForm">
+    <div class="row">
+      <div class="col-md-6">
+        <div style="margin-top: 35px; margin-bottom: 50px;">
+          <h5 style="text-align: center">Image upload</h5>
+          <div class="mb-3">
+            <input
+              class="form-control"
+              type="file"
+              id="formFile"
+              (change)="onFileSelected($event)"
+            />
+            <button class="btn btn-primary">upload</button>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="imagePath" class="col-md-6" style="margin-top: 35px; margin-bottom: 50px; text-align: center;">
+        <span><h5>Choosen Image</h5></span>
+        <div class="box box-1"><img  [src]="imagePath" [alt]="imagePath"></div>
+      </div>
+    </div>
+    <div class="form-label">
+      <span class="input-group-text"> Category </span>
+      <select class="form-select" formControlName="categoryId">
+        <option *ngFor="let category of categories" [ngValue]="category.id">
+          {{ category.categoryName }}
+        </option>
+      </select>
+    </div>
+    <div class="form-label">
+      <span class="input-group-text"> Title </span>
+      <textarea
+        style="height: 85px"
+        class="form-control"
+        formControlName="blogTitle"
+        aria-label="With textarea"
+      ></textarea>
+    </div>
+
+    <div class="form-label">
+      <span class="input-group-text">Content</span>
+      <textarea
+        style="height: 195px"
+        class="form-control"
+        formControlName="blogContent"
+        aria-label="With textarea"
+      ></textarea>
+    </div>
+  </form>
+
+  <button
+    style="background-color: #586181"
+    class="w-100 btn btn-lg btn-primary"
+    type="submit"
+    [disabled]="!checkIfValid()"
+    (click)="addBlog()"
+  >
+    Save Blog
+  </button>
+</div>

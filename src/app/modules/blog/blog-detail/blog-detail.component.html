@@ -1,0 +1,114 @@
+<div class="row" *ngIf="blogDetail">
+  <div class="col-lg-8 col-md-10 mx-auto">
+    <h2 class="post-content">{{ blogDetail.blogTitle }}</h2>
+
+    <h3 class="post-content">{{ blogDetail.blogContent }}</h3>
+    <h2 style="text-align: center">
+      <h4>{{ favCount }}</h4>
+      <i
+        *ngIf="checkIfLiked === false; else liked"
+        (click)="addFav()"
+        id="addFav"
+        class="bi bi-heart bi-10x"
+      ></i>
+      <ng-template #liked>
+        <i
+          style="color: red"
+          (click)="deleteFav()"
+          id="deleteFav"
+          class="bi bi-heart-fill"
+        ></i>
+      </ng-template>
+    </h2>
+    <p style="color: grey; text-align: center" class="post-meta">
+      <i> Category of Blog : </i>
+      <i
+        ><a style="color: grey; text-decoration: none">{{
+          blogDetail.categoryName
+        }}</a></i
+      >
+    </p>
+    <p style="color: grey; text-align: center" class="post-meta">
+      <i>Posted by : </i>
+      <i
+        ><a style="color: grey; text-decoration: none">{{
+          blogDetail.email
+        }}</a></i
+      >
+    </p>
+
+    <p style="color: grey; text-align: center" class="post-meta">
+      <i>Cretaed At : </i>
+      <i
+        ><a style="color: grey; text-decoration: none">{{
+          blogDetail.createdAt | date: "mediumDate"
+        }}</a></i
+      >
+    </p>
+  </div>
+</div>
+
+<div class="container mt-5">
+  <div class="d-flex justify-content-center row">
+    <div class="col-md-8">
+      <div class="d-flex flex-column comment-section">
+        <h3 id="header">Blog Comments</h3>
+        <hr />
+        <div *ngFor="let comment of comments">
+          <div class="bg-white p-2">
+            <div class="d-flex flex-row user-info">
+              <div class="d-flex flex-column justify-content-start ml-2">
+                <span class="d-block name text-black-50">
+                  <span style="font-weight: bold text-black-50"><a style="font-weight:500">Owner</a>:</span>
+                  {{ comment.userEmail }} ||
+                  {{ comment.createdTime | date: "medium" }}</span
+                >
+              </div>
+              <div id="deleteButton" *ngIf="isCommentOwner(comment)">
+                <button
+                  (click)="deleteComment(comment.commentId)"
+                  type="button"
+                  class="btn btn-primary-outline"
+                >
+                  <i class="bi bi-trash"> </i>Delete comment
+                </button>
+              </div>
+            </div>
+            <div class="mt-2">
+              <p class="comment-text">
+                {{ comment.commentContent }}
+              </p>
+            </div>
+            <hr />
+          </div>
+        </div>
+
+        <div class="bg-light p-2">
+          <form [formGroup]="commentPostForm">
+            <div class="d-flex flex-row align-items-start">
+              <textarea 
+                formControlName="commentContent"
+                class="form-control ml-1 shadow-none textarea"
+              ></textarea>
+            </div>
+          </form>
+
+          <div class="mt-2 text-right">
+            <button
+              class="btn btn-primary btn-sm shadow-none"
+              type="button"
+              (click)="addComment()"
+            >
+              Post comment</button
+            ><button
+              class="btn btn-outline-primary btn-sm ml-1 shadow-none"
+              type="button"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
